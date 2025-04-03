@@ -7,6 +7,21 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 import companies from "../data/companies.json";
+import faq from "../data/faq.json";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Accordion } from "@radix-ui/react-accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const LandingPage = () => {
   return (
@@ -50,7 +65,37 @@ const LandingPage = () => {
         </CarouselContent>
       </Carousel>
       <img src="/banner.jpeg" className="w-full rounded-2xl" />
-      <section></section>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>For Job Seeker</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            Search And Apply For Jobs, track applications, and more
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>For Employeers</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            Post Job,manage applications and find the best candidate
+          </CardContent>
+        </Card>
+      </section>
+
+      <Accordion type="single" collapsible>
+        {faq.map((item, index) => {
+          return (
+            <AccordionItem value={`item-${index + 1}`}>
+              <AccordionTrigger>{item.question}</AccordionTrigger>
+              <AccordionContent>{item.answer}</AccordionContent>
+            </AccordionItem>
+          );
+        })}
+      </Accordion>
     </main>
   );
 };
